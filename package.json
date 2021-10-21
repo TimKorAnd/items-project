@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "start": "tsc main.ts && node main.js"
+  },
+  "dependencies": {
+    "@types/node": "^16.11.1"
+  }
+}
