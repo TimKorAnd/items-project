@@ -60,14 +60,14 @@ const output: Output = {
   cat_2: ["This item number 1 from category 2", "This item number 2 from category 2"],
 }
 
-const getInputsWithResolvedData = async (input: Input): Promise<ItemWithResolvedData[]> => {
+export const getInputsWithResolvedData = async (input: Input): Promise<ItemWithResolvedData[]> => {
   return await Promise.all(input.map(async (item) => ({
     [ITEM_WITH_RESOLVED_DATA_FIELDS.CATEGORY]: item[ITEM_FIELDS.CATEGORY],
     [ITEM_WITH_RESOLVED_DATA_FIELDS.RESOLVED_DATA]: await item[ITEM_FIELDS.DATA]()
   })));
 }
 
-const getOutput = (inputsWithResolvedData: ItemWithResolvedData[]) => {
+export const getOutput = (inputsWithResolvedData: ItemWithResolvedData[]): Output => {
   const output: Output = {};
   return inputsWithResolvedData.reduce((output, item) => {
     if (!output[item[ITEM_WITH_RESOLVED_DATA_FIELDS.CATEGORY]]) output[item[ITEM_WITH_RESOLVED_DATA_FIELDS.CATEGORY]] = [];
@@ -76,7 +76,7 @@ const getOutput = (inputsWithResolvedData: ItemWithResolvedData[]) => {
   }, output);
 }
 
-const main = async (input: Input): Promise<Output> => {
+export const main = async (input: Input): Promise<Output> => {
   const inputsWithResolvedData: ItemWithResolvedData[] = await getInputsWithResolvedData(input);
   return getOutput(inputsWithResolvedData);
 }
