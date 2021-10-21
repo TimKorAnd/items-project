@@ -1,28 +1,6 @@
-enum ITEM_FIELDS {
-  CATEGORY = 'category',
-  DATA = 'data',
-}
-
-enum ITEM_WITH_RESOLVED_DATA_FIELDS {
-  CATEGORY = 'category',
-  RESOLVED_DATA = 'resolvedData',
-}
-
-type ItemNumber = number; // TODO should restricted?
-type CategoryNumber = number; // TODO should restricted?
-type Category = `cat_${CategoryNumber}`;
-type Data = () => Promise<ResolvedData>;
-
-type ResolvedData = `This item number ${ItemNumber} from category ${CategoryNumber}`
-type Item = { [ITEM_FIELDS.CATEGORY]: Category, [ITEM_FIELDS.DATA]: Data };
-
-type ItemWithResolvedData = {
-  [ITEM_WITH_RESOLVED_DATA_FIELDS.CATEGORY]: Category,
-  [ITEM_WITH_RESOLVED_DATA_FIELDS.RESOLVED_DATA]: ResolvedData
-};
-
-type Input = Array<Item>;
-type Output = Record<Category, Array<ResolvedData>>;
+import { Item, Input, Output, ItemWithResolvedData } from './main.d';
+import ITEM_WITH_RESOLVED_DATA_FIELDS from "./constants/itemWithResolvedDataFields";
+import ITEM_FIELDS from "./constants/itemFields";
 
 
 const item1: Item = {
